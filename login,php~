@@ -1,0 +1,25 @@
+<?php
+session_start();
+$conn = mysqli_connect('localhost','root','1598753','mydatabase');
+ if(!$conn){
+        echo 'Connection error' .mysqli_connect_error();
+     }
+
+
+ $user = $_POST['user'];
+ $password = $_POST['password'];
+
+ $username_query = " SELECT * FROM  Registration WHERE username = '$user' && password = '$password' ";
+ $result = mysqli_query($conn,$username_query);
+
+ $num = mysqli_num_rows($result);
+      if ($num == 1)
+      {
+       echo "Login successful";
+       header('location:home.php')
+       }
+       else{
+       echo "Unvalid username or password";header('location:login.php);
+}
+
+?>
